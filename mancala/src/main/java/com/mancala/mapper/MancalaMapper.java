@@ -22,12 +22,13 @@ public class MancalaMapper {
 					gameEntity.isWinnerExist, gameEntity.getWinner());
 
 		} else {
+			//throw new ResourceNotFoundException("No enough Players!");
 			throw new ResourceNotFoundException("No enough Players!");
 		}
 
 	}
 
-	public PlayerEntity convertPlayerDtoToPlayerEntity(String type, PlayerDto playerDto) {
+	private PlayerEntity convertPlayerDtoToPlayerEntity(String type, PlayerDto playerDto) {
 		return PlayerEntity.builder().pits(playerDto.getPits()).treasury(playerDto.getTreasury()).playerType(type)
 				.build();
 	}

@@ -1,5 +1,10 @@
 package com.mancala.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Movement {
 
-	public String gameId;
+    @NotBlank
+    public String gameId;
 
-	// @Pattern(regexp = "(?:player1|player2)", message = "must be player1 or
-	// player2")
-	public String player;
+    @NotBlank
+    @Pattern(regexp = "(?:player1|player2)", message = "must be player1 or player2")
+    public String player;
 
-	public int pitNumber;
+    @Min(0)
+    @Max(5)
+    public int pitNumber;
 
 }

@@ -134,7 +134,7 @@ public class GameServiceImpl implements GameService {
 					counterPits[i]++;
 					stones--;
 				}
-				if (stones == 1 && counterPits[i] == 0) {
+				if (stones == 1 && counterPits[i] == 0  && ownPits[Constants.PIT - i - 1] > 0 ) {
 					currentPlayer.treasury += 1 + ownPits[Constants.PIT - i - 1];
 					ownPits[6 - i - 1] = Constants.BLANK;
 					stones--;
