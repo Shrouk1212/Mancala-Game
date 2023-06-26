@@ -11,8 +11,6 @@ public class Movement {
 
 	public String gameId;
 
-	// @Pattern(regexp = "(?:player1|player2)", message = "must be player1 or
-	// player2")
 	public String player;
 
 	public int pitNumber;
