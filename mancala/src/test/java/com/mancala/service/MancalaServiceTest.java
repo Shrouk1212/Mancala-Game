@@ -57,8 +57,10 @@ public class MancalaServiceTest {
 		GameEntity gameEntity = new GameEntity();
 		gameEntity.setId("random");
 		Optional<GameEntity> gameEntityOptional = Optional.of(gameEntity);
+		
 		when(mancalaRepository.findById("random")).thenReturn(gameEntityOptional);
-		when(mancalaMapper.convertGameEntityToGameDto(gameEntity)).thenReturn(gameDto);
+		when(mancalaMapper.convertGameEntityToGameDto(gameEntity)).thenReturn(gameDto)
+		;
 		GameDto game = gameService.getMove(movement);
 		assertEquals(game.getCurrentPlayer(), Constants.PLAYER2_KEY);
 		assertFalse(game.isWinnerExist);

@@ -1,33 +1,35 @@
 # Mancala Game
 
 ## Description
+Mancala or Kalaha is a game in the mancala family invented in the United States by
 
 ### Rules :
-Each of the two players has his six pits in front of him. To the right of the six pits, each player has a
-larger pit. At the start of the game, there are six stones in each of the six-round pits.
+1-At the beginning of the game, four seeds are placed in each pit. This is the traditional method.
+2-Each player controls the six pits and their stones on the player’s side of the board. The player’s score is the number of seeds in the store to their right (treasury).
+3-Players take turns moving their stones. On a turn, the player removes all stones from one of the pits under their control. Moving counter-clockwise,
+ the player drops one stone in each pit in turn, including the player’s own treasury but not their opponent’s.
+4-If the last moved stone lands in an empty pit owned by the player, and the opposite pit contains seeds, both the last seed and the opposite seeds are captured and placed into the player’s treasury.
+5-If the last moving stone lands in the player’s treasury, the player gets an additional move. 
+When one player no longer has any stones in any of their pits,the game ends. The other player moves all remaining stones to their pits,and the player with the most stones in their treasurey wins.
 
-The player who begins with the first move picks up all the stones in any of his own six pits and sows the
-stones onto the right, one in each of the following pits, including his own big pit. No stones are put in
-the opponents' big pit. If the player's last stone lands in his own big pit, he gets another turn. This can
-be repeated several times before it's the other player's turn.
+## Technologies
+Springboot
+Spring Security : for security 
+Spring MVC : for creating RESTful API
+h2 database : to presist the Game information
+spring data JPA : to presist the Game information
+Swagger : Swagger-UI, for API documentation
+thymeleaf : for the Ui
+Actuator : Monitoring the app, gathering metrics, understanding traffic
+devtools :  to trigger a browser refresh when a resource is changed
 
-### Capturing Stones :
-During the game, the pits are emptied on both sides. Always when the last stone lands in its own empty pit,
-the player captures his own stone and all stones in the opposite pit (the other player's pit) and puts
-them in his own (big or little?) pit.
-
-### The Game Ends :
-The game is over as soon as one of the sides runs out of stones. The player who still has stones in his pits
-keeps them and puts them in his big pit. The winner of the game is the player who has the most stones in his
-big pit.
-
-## Features
-Spring Security 
-Service Interface
-Mapper Classes
-MVC application
-Spring data Jpa and H2 Database
-Unit Tests
+## Architecture
+The solution uses Microservices architecture.
+The implementation consists of one microservice implemented in Java using Spring Boot :
+mancala :
+1- getStart endpoint : To create a new Game
+2- getMovement endpoint : to make movements of the stones.
+You can find several Tests created 
 
 ## How to make it work:
 Just download and run the project. 
