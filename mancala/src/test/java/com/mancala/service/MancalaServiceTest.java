@@ -110,10 +110,10 @@ public class MancalaServiceTest {
 		assertEquals(resultGame.getCurrentPlayer(), Constants.PLAYER1_KEY);
 		assertFalse(resultGame.isWinnerExist);
 		assertEquals(resultGame.getPlayer1().getTreasury(), 1);
-		assertEquals(0, resultGame.getPlayer1().getPits()[2]); // The selected pit should be empty
-		assertEquals(5, resultGame.getPlayer1().getPits()[3]); // The stone should be distributed to the subsequent pits
-		assertEquals(4, resultGame.getPlayer2().getPits()[0]); // No change in the counter player's pits
-		assertEquals(4, resultGame.getPlayer2().getPits()[1]); // No change in the counter player's pits
+		assertEquals(0, resultGame.getPlayer1().getPits()[2]);
+		assertEquals(5, resultGame.getPlayer1().getPits()[3]); 
+		assertEquals(4, resultGame.getPlayer2().getPits()[0]); 
+		assertEquals(4, resultGame.getPlayer2().getPits()[1]); 
 		assertEquals(1, resultGame.getPlayer1().getTreasury());
 		assertEquals(1, resultGame.getPlayer1().getTreasury());
 
@@ -140,10 +140,10 @@ public class MancalaServiceTest {
 		assertEquals(resultGame.getCurrentPlayer(), Constants.PLAYER1_KEY);
 		assertFalse(resultGame.isWinnerExist);
 		assertEquals(resultGame.getPlayer1().getTreasury(), 1);
-		assertEquals(0, resultGame.getPlayer1().getPits()[2]); // The selected pit should be empty
-		assertEquals(5, resultGame.getPlayer1().getPits()[3]); // The stone should be distributed to the subsequent pits
-		assertEquals(4, resultGame.getPlayer2().getPits()[0]); // No change in the counter player's pits
-		assertEquals(4, resultGame.getPlayer2().getPits()[1]); // No change in the counter player's pits
+		assertEquals(0, resultGame.getPlayer1().getPits()[2]); 
+		assertEquals(5, resultGame.getPlayer1().getPits()[3]); 
+		assertEquals(4, resultGame.getPlayer2().getPits()[0]); 
+		assertEquals(4, resultGame.getPlayer2().getPits()[1]);
 		assertEquals(1, resultGame.getPlayer1().getTreasury());
 		assertEquals(1, resultGame.getPlayer1().getTreasury());
 
