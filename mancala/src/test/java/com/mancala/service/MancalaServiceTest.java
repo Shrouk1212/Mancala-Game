@@ -103,7 +103,7 @@ public class MancalaServiceTest {
 
 		GameDto resultGame = gameService.getMove(movement);
 		assertEquals(resultGame.getCurrentPlayer(), Constants.PLAYER1_KEY);
-		assertFalse(resultGame.isWinnerExist);
+		assertFalse(resultGame.isWinnerExist());
 		assertEquals(resultGame.getPlayer1().getTreasury(), 1);
 		assertEquals(0, resultGame.getPlayer1().getPits()[2]);
 		assertEquals(5, resultGame.getPlayer1().getPits()[3]); 
@@ -133,7 +133,7 @@ public class MancalaServiceTest {
 
 		GameDto resultGame = gameService.getMove(movement);
 		assertEquals(resultGame.getCurrentPlayer(), Constants.PLAYER1_KEY);
-		assertFalse(resultGame.isWinnerExist);
+		assertFalse(resultGame.isWinnerExist());
 		assertEquals(resultGame.getPlayer1().getTreasury(), 1);
 
 		assertEquals(0, resultGame.getPlayer1().getPits()[2]); 
