@@ -102,6 +102,7 @@ public class GameServiceImpl implements GameService {
 		PlayerDto counterPlayer = game.getPlayer2();
 
 		int[] ownPits = currentPlayer.getPits();
+		System.out.println(ownPits.length);
 		int stones = ownPits[pitNumber];
 		boolean isMyTurn = false;
 
@@ -128,7 +129,7 @@ public class GameServiceImpl implements GameService {
 				int i = 0;
 				int targetIndex = (stones >= Constants.PIT) ? Constants.PIT : stones;
 
-				for (i = 0; i < targetIndex - 1; i++) {
+				for (i = 0; i < targetIndex - 1 ; i++) {
 					if (stones == Constants.BLANK)
 						break;
 					counterPits[i]++;

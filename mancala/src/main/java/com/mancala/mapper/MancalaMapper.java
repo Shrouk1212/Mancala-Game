@@ -22,7 +22,6 @@ public class MancalaMapper {
 					gameEntity.isWinnerExist, gameEntity.getWinner());
 
 		} else {
-			//throw new ResourceNotFoundException("No enough Players!");
 			throw new ResourceNotFoundException("No enough Players!");
 		}
 
