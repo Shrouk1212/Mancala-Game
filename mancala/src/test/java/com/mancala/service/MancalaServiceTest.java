@@ -3,11 +3,9 @@ package com.mancala.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +23,6 @@ import com.mancala.mapper.MancalaMapper;
 import com.mancala.repository.MancalaRepository;
 import com.mancala.service.impl.GameServiceImpl;
 import com.mancala.utils.Constants;
-import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
