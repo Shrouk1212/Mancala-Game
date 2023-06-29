@@ -102,7 +102,6 @@ public class GameServiceImpl implements GameService {
 		PlayerDto counterPlayer = game.getPlayer2();
 
 		int[] ownPits = currentPlayer.getPits();
-		System.out.println(ownPits.length);
 		int stones = ownPits[pitNumber];
 		boolean isMyTurn = false;
 
@@ -168,13 +167,21 @@ public class GameServiceImpl implements GameService {
 	// decide who is the winner
 	private void decideWinner(GameDto game) {
 		int player1Treasury = game.getPlayer1().treasury + Arrays.stream(game.getPlayer1().getPits()).sum();
+		game.getPlayer1().setTreasury(player1Treasury);
+		game.getPlayer1().setPits(new int[Constants.PIT]); 
 		int player2Treasury = game.getPlayer2().treasury + Arrays.stream(game.getPlayer2().getPits()).sum();
+		game.getPlayer2().setTreasury(player2Treasury);
+		game.getPlayer2().setPits(new int[Constants.PIT]);
 		if (player1Treasury > player2Treasury) {
 			log.info("Winner of " + game.getGameId() + " is " + Constants.PLAYER1_KEY);
 			game.setWinner(Constants.PLAYER1_KEY);
-		} else {
+			
+		} else if(player1Treasury < player2Treasury) {
 			log.info("Winner of " + game.getGameId() + " is " + Constants.PLAYER2_KEY);
 			game.setWinner(Constants.PLAYER2_KEY);
+		}else {
+			log.info("Winner of " + game.getGameId() + " is None!" );
+			game.setWinner("None");
 		}
 	}
 

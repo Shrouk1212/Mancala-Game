@@ -173,5 +173,55 @@ public class MancalaServiceTest {
 		assertEquals(7, resultGame.getPlayer2().getTreasury());
 
 	}
+	
+	@Test
+	public void whenMove_whenThePlayersAreEqual() throws ResourceNotFoundException {
+		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 5);
+
+		GameDto gameDto = new GameDto();
+		gameDto.setGameId("random");
+		gameDto.setCurrentPlayer(Constants.PLAYER1_KEY);
+		int[] pits1 = {0,0,0,0,0,1};
+		int[] pits2 = {0,0,0,0,1,0};
+		gameDto.setPlayer1(new PlayerDto( pits1 , 23));
+		gameDto.setPlayer2(new PlayerDto( pits2 , 23));
+
+		GameEntity gameEntity = new GameEntity();
+		gameEntity.setId("random");
+		Optional<GameEntity> gameEntityOptional = Optional.of(gameEntity);
+
+		when(mancalaRepository.findById("random")).thenReturn(gameEntityOptional);
+		when(mancalaMapper.convertGameEntityToGameDto(gameEntity)).thenReturn(gameDto);
+
+		GameDto resultGame = gameService.getMove(movement);
+
+		assertEquals(Constants.None, resultGame.getWinner());
+
+	}
+	
+	@Test
+	public void whenMove_whenThereIsAWinner() throws ResourceNotFoundException {
+		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 5);
+
+		GameDto gameDto = new GameDto();
+		gameDto.setGameId("random");
+		gameDto.setCurrentPlayer(Constants.PLAYER1_KEY);
+		int[] pits1 = {0,0,0,0,0,1};
+		int[] pits2 = {0,1,0,0,1,0};
+		gameDto.setPlayer1(new PlayerDto( pits1 , 24));
+		gameDto.setPlayer2(new PlayerDto( pits2 , 21));
+
+		GameEntity gameEntity = new GameEntity();
+		gameEntity.setId("random");
+		Optional<GameEntity> gameEntityOptional = Optional.of(gameEntity);
+
+		when(mancalaRepository.findById("random")).thenReturn(gameEntityOptional);
+		when(mancalaMapper.convertGameEntityToGameDto(gameEntity)).thenReturn(gameDto);
+
+		GameDto resultGame = gameService.getMove(movement);
+
+		assertEquals(Constants.PLAYER1_KEY, resultGame.getWinner());
+
+	}
 
 }
