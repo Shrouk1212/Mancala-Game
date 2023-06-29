@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 public class GameDto {
 
 	private String gameId;
-	public String currentPlayer;
-	public PlayerDto player1;
-	public PlayerDto player2;
-	public boolean isWinnerExist;
-	public String winner;
+	private String currentPlayer;
+	private PlayerDto player1;
+	private PlayerDto player2;
+	private boolean isWinnerExist;
+	private String winner;
 
 	public GameDto(PlayerDto playerOne, PlayerDto playerTwo) {
 		super();

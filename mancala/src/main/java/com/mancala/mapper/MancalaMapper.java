@@ -15,10 +15,10 @@ This class responsible of mapping Entity to DTO and DTO to Entity
 public class MancalaMapper {
 
 	public GameDto convertGameEntityToGameDto(GameEntity gameEntity) throws ResourceNotFoundException {
-		if (gameEntity.getPlayer().size() == 2) {
+		if (gameEntity.getPlayers().size() == 2) {
 			return new GameDto(gameEntity.getId(), gameEntity.getCurrentPlayer(),
-					new PlayerDto(gameEntity.getPlayer().get(0).getPits(), gameEntity.getPlayer().get(0).getTreasury()),
-					new PlayerDto(gameEntity.getPlayer().get(1).getPits(), gameEntity.getPlayer().get(1).getTreasury()),
+					new PlayerDto(gameEntity.getPlayers().get(0).getPits(), gameEntity.getPlayers().get(0).getTreasury()),
+					new PlayerDto(gameEntity.getPlayers().get(1).getPits(), gameEntity.getPlayers().get(1).getTreasury()),
 					gameEntity.isWinnerExist, gameEntity.getWinner());
 
 		} else {
@@ -37,7 +37,7 @@ public class MancalaMapper {
 		gameEntity.setId(game.getGameId());
 		gameEntity.setCurrentPlayer(game.getCurrentPlayer());
 		gameEntity.setWinner(game.getWinner());
-		gameEntity.setWinnerExist(game.isWinnerExist);
+		gameEntity.setWinnerExist(game.isWinnerExist());
 		gameEntity.setPlayers(convertPlayerDtoToPlayerEntity(Constants.PLAYER1_KEY, game.getPlayer1()));
 		gameEntity.setPlayers(convertPlayerDtoToPlayerEntity(Constants.PLAYER2_KEY, game.getPlayer2()));
 		return gameEntity;

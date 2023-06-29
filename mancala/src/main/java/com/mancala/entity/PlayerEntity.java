@@ -23,11 +23,11 @@ import lombok.NoArgsConstructor;
 public class PlayerEntity {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
-	public String playerType;
+	private Long id;
+	private String playerType;
 	@Column(name="pits")
-    public int[] pits;
-    public int treasury;
+    private int[] pits;
+    private int treasury;
     
  
 

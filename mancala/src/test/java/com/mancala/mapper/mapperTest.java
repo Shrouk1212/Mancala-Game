@@ -15,6 +15,7 @@ import com.mancala.dto.PlayerDto;
 import com.mancala.entity.GameEntity;
 import com.mancala.entity.PlayerEntity;
 import com.mancala.exceptions.ResourceNotFoundException;
+import com.mancala.utils.Constants;
 
 @SpringBootTest
 public class mapperTest {
@@ -23,16 +24,23 @@ public class mapperTest {
 	MancalaMapper mancalaMapper;
 	
 	@Test
-	public void convertGameEntityToGameDto() throws ResourceNotFoundException {
+	public void testConvertGameEntityThenReturnGameDto() throws ResourceNotFoundException {
 		PlayerEntity playerEntityOne = new PlayerEntity();
-		PlayerEntity playerEntityTwo = new PlayerEntity();
-		List<PlayerEntity> playerEntityList = new ArrayList<PlayerEntity>();
+		int [] pits1 = new int[] {4,4,4,4,4,4};
+		playerEntityOne.setPits(pits1);
+		playerEntityOne.setTreasury(0);
+		playerEntityOne.setPlayerType(Constants.PLAYER1_KEY);
 		
-		playerEntityList.add(playerEntityOne);
-		playerEntityList.add(playerEntityTwo);
+		PlayerEntity playerEntityTwo = new PlayerEntity();
+		int [] pits2 = new int[] {4,4,4,4,4,4};
+		playerEntityTwo.setPits(pits2);
+		playerEntityTwo.setTreasury(0);
+		playerEntityTwo.setPlayerType(Constants.PLAYER2_KEY);
+	
 		GameEntity gameEntity = new GameEntity();
 		gameEntity.setId("random");
-		gameEntity.setPlayer(playerEntityList);
+		gameEntity.setPlayers(playerEntityOne);
+		gameEntity.setPlayers(playerEntityTwo);
 		GameDto resultGameDto = mancalaMapper.convertGameEntityToGameDto(gameEntity);
 		
 		
@@ -40,37 +48,78 @@ public class mapperTest {
 		gameDtoExpected.setGameId("random");
 		gameDtoExpected.setPlayer1(new PlayerDto());
 		gameDtoExpected.setPlayer2(new PlayerDto());
-		assertEquals(gameDtoExpected.getGameId(), resultGameDto.getGameId());
-		assertEquals(gameDtoExpected.getPlayer1().treasury , resultGameDto.getPlayer1().treasury);
 		
+		assertEquals(gameDtoExpected.getGameId(), resultGameDto.getGameId());
+		assertEquals(gameDtoExpected.getPlayer1().getTreasury() , resultGameDto.getPlayer1().getTreasury());
+
+		assertEquals( resultGameDto.getCurrentPlayer() , gameDtoExpected.getCurrentPlayer());
+		assertEquals(resultGameDto.getWinner(), gameDtoExpected.getWinner());
+		assertEquals(resultGameDto.isWinnerExist(), gameDtoExpected.isWinnerExist());
+		assertEquals(resultGameDto.getPlayer1().getTreasury() ,0);
+		assertEquals(resultGameDto.getPlayer1().getPits().length,6);
+		assertEquals(resultGameDto.getPlayer1().getPits()[0] , 4);
+		assertEquals(resultGameDto.getPlayer1().getPits()[1] , 4);
+		assertEquals(resultGameDto.getPlayer1().getPits()[2] , 4);
+		assertEquals(resultGameDto.getPlayer1().getPits()[3] , 4);
+		assertEquals(resultGameDto.getPlayer1().getPits()[4] , 4);
+		assertEquals(resultGameDto.getPlayer1().getPits()[5] , 4);
+		
+		assertEquals(resultGameDto.getPlayer2().getTreasury() ,0);
+		assertEquals(resultGameDto.getPlayer2().getPits().length,6);
+		assertEquals(resultGameDto.getPlayer2().getPits()[0] , 4);
+		assertEquals(resultGameDto.getPlayer2().getPits()[1] , 4);
+		assertEquals(resultGameDto.getPlayer2().getPits()[2] , 4);
+		assertEquals(resultGameDto.getPlayer2().getPits()[3] , 4);
+		assertEquals(resultGameDto.getPlayer2().getPits()[4] , 4);
+		assertEquals(resultGameDto.getPlayer2().getPits()[5] , 4);
 		
 	}
 	
 	@Test
-	public void convertGameDtoToGameEntity() {
+	public void testConvertGameDtoThenReturnGameEntity() {
 	
 		GameDto gameDto = new GameDto(new PlayerDto() , new PlayerDto());
 		gameDto.setGameId("random");
 		GameEntity resultGameEntity = mancalaMapper.convertGameDtoToGameEntity(gameDto);
 		
-		GameEntity GameEntity = new GameEntity();
-		GameEntity.setId("random");
+		GameEntity expectedGameEntity = new GameEntity();
+		expectedGameEntity.setId("random");
+		expectedGameEntity.setCurrentPlayer(Constants.PLAYER1_KEY);
 		
-		assertEquals(resultGameEntity.getId(), GameEntity.getId());
-		assertEquals(resultGameEntity.getPlayer().size() ,2);
+		assertEquals(resultGameEntity.getId(), expectedGameEntity.getId());
+		assertEquals(resultGameEntity.getCurrentPlayer(), expectedGameEntity.getCurrentPlayer());
+		assertEquals(resultGameEntity.getWinner(), expectedGameEntity.getWinner());
+		assertEquals(resultGameEntity.isWinnerExist, expectedGameEntity.isWinnerExist);
+		assertEquals(resultGameEntity.getPlayers().size() ,2);
+		assertEquals(resultGameEntity.getPlayers().get(0).getTreasury() ,0);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits().length,6);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits()[0] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits()[1] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits()[2] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits()[3] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits()[4] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(0).getPits()[5] , 4);
+		
+		assertEquals(resultGameEntity.getPlayers().get(1).getTreasury() ,0);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits().length,6);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits()[0] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits()[1] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits()[2] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits()[3] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits()[4] , 4);
+		assertEquals(resultGameEntity.getPlayers().get(1).getPits()[5] , 4);
+		
 	}
 	
 	
 	@Test
-	public void convertGameEntityToGameDto_Exception() throws Exception  {
+	public void testConvertGameEntityThenReturnGameDtoException() throws Exception  {
 	
 		PlayerEntity playerEntityOne = new PlayerEntity();
-		List<PlayerEntity> playerEntityList = new ArrayList<PlayerEntity>();
 		
-		playerEntityList.add(playerEntityOne);
 		GameEntity gameEntity = new GameEntity();
 		gameEntity.setId("random");
-		gameEntity.setPlayer(playerEntityList);
+		gameEntity.setPlayers(playerEntityOne);
 	
 		ResourceNotFoundException resourceNotFoundException = Assertions.assertThrows(ResourceNotFoundException.class, () -> {
 			mancalaMapper.convertGameEntityToGameDto(gameEntity);

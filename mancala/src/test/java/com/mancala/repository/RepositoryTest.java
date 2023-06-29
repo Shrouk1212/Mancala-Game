@@ -19,7 +19,7 @@ public class RepositoryTest {
     MancalaRepository gameRepository;
 
     @Test
-    public void testRepository() throws  Exception {
+    public void testRepositoryThensucceed() throws  Exception {
     	
     	PlayerEntity playerEntityOne = new PlayerEntity();
 		PlayerEntity playerEntityTwo = new PlayerEntity();

@@ -76,7 +76,7 @@ public class GameServiceImpl implements GameService {
 			PlayerDto player2 = gameDto.getPlayer2();
 			gameDto.setPlayer1(player2);
 			gameDto.setPlayer2(player1);
-			currentPlayerTurn = calculateMovements(gameDto, movement.pitNumber);
+			currentPlayerTurn = calculateMovements(gameDto, movement.getPitNumber());
 			if (!currentPlayerTurn) {
 				gameDto.setCurrentPlayer(Constants.PLAYER1_KEY);
 			}
@@ -118,7 +118,9 @@ public class GameServiceImpl implements GameService {
 
 			if (stones != Constants.BLANK) {
 				isMyTurn = true;
-				currentPlayer.treasury++;
+				int currentPlayerTreasury = currentPlayer.getTreasury();
+				currentPlayerTreasury ++;
+				currentPlayer.setTreasury(currentPlayerTreasury);
 				stones--;
 			}
 
@@ -135,7 +137,8 @@ public class GameServiceImpl implements GameService {
 					stones--;
 				}
 				if (stones == 1 && counterPits[i] == 0  && ownPits[Constants.PIT - i - 1] > 0 ) {
-					currentPlayer.treasury += 1 + ownPits[Constants.PIT - i - 1];
+					int currentPlayerTreasury = currentPlayer.getTreasury() +  1 + ownPits[Constants.PIT - i - 1];
+					currentPlayer.setTreasury(currentPlayerTreasury); 
 					ownPits[6 - i - 1] = Constants.BLANK;
 					stones--;
 				} else if (stones == 1) {
@@ -166,10 +169,10 @@ public class GameServiceImpl implements GameService {
 	}
 	// decide who is the winner
 	private void decideWinner(GameDto game) {
-		int player1Treasury = game.getPlayer1().treasury + Arrays.stream(game.getPlayer1().getPits()).sum();
+		int player1Treasury = game.getPlayer1().getTreasury() + Arrays.stream(game.getPlayer1().getPits()).sum();
 		game.getPlayer1().setTreasury(player1Treasury);
 		game.getPlayer1().setPits(new int[Constants.PIT]); 
-		int player2Treasury = game.getPlayer2().treasury + Arrays.stream(game.getPlayer2().getPits()).sum();
+		int player2Treasury = game.getPlayer2().getTreasury() + Arrays.stream(game.getPlayer2().getPits()).sum();
 		game.getPlayer2().setTreasury(player2Treasury);
 		game.getPlayer2().setPits(new int[Constants.PIT]);
 		if (player1Treasury > player2Treasury) {

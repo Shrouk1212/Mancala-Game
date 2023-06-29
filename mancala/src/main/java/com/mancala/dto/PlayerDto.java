@@ -3,15 +3,13 @@ package com.mancala.dto;
 import java.util.Arrays;
 
 import com.mancala.utils.Constants;
-
-import lombok.Builder;
 import lombok.Data;
 
 @Data
 public class PlayerDto {
 
-	public int[] pits;
-	 public int treasury;
+	private int[] pits;
+	private int treasury;
 
 	public PlayerDto() {
 		this.pits = new int[Constants.PIT];

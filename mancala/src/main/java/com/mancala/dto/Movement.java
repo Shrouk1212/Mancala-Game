@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 public class Movement {
 
     @NotBlank
-    public String gameId;
+    private String gameId;
 
     @NotBlank
     @Pattern(regexp = "(?:player1|player2)", message = "must be player1 or player2")
-    public String player;
+    private String player;
 
     @Min(0)
     @Max(5)
-    public int pitNumber;
+    private int pitNumber;
 
 }

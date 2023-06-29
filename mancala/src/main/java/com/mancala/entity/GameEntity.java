@@ -25,11 +25,11 @@ public class GameEntity {
 	
 	 @OneToMany(cascade = CascadeType.ALL,  orphanRemoval = true)
 	  @JoinColumn(name = "game_id")
-	 private List<PlayerEntity> player = new ArrayList<>();
+	 private List<PlayerEntity> players = new ArrayList<>();
 
 
 	public void setPlayers(PlayerEntity player) {
-		this.player.add(player);
+		this.players.add(player);
 	}
 	
 

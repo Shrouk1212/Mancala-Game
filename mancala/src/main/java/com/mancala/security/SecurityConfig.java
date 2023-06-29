@@ -25,8 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Appl
 	@Bean
 	public UserDetailsService userDetailsService() {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(
-				User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build());
+		manager.createUser(User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build());
 		return manager;
 	}
 
@@ -35,5 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Appl
 		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 
 		http.csrf().disable();
+		http.headers().frameOptions().disable();
 	}
 }

@@ -40,7 +40,7 @@ public class MancalaServiceTest {
 	}
 
 	@Test
-	public void testGetGameExistingGame() throws ResourceNotFoundException {
+	public void testGetGameWhenGameExists() throws ResourceNotFoundException {
 
 		String gameId = "existingGameId";
 		GameDto expectedGameDto = new GameDto(new PlayerDto(), new PlayerDto());
@@ -59,7 +59,7 @@ public class MancalaServiceTest {
 	}
 
 	@Test
-	public void testGetGameNewGame() {
+	public void testGetGameWhenNewGame() {
 
 		String gameId = "nonExistingGameId";
 		GameDto expectedGameDto = new GameDto(new PlayerDto(), new PlayerDto());
@@ -73,7 +73,7 @@ public class MancalaServiceTest {
 	}
 
 	@Test
-	public void whenMove_IdNotExists() throws Exception {
+	public void TestMoveWhenIdNotExists() throws Exception {
 		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 4);
 
 		ResourceNotFoundException resourceNotFoundException = Assertions.assertThrows(ResourceNotFoundException.class,
@@ -84,7 +84,7 @@ public class MancalaServiceTest {
 	}
 
 	@Test
-	public void whenMove_LastStoneInOwnTreasury() throws Exception {
+	public void testMoveWhenLastStoneInOwnTreasury() throws Exception {
 		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 2);
 
 		// Create a test game with initial state
@@ -115,7 +115,7 @@ public class MancalaServiceTest {
 	}
 
 	@Test
-	public void whenMove_LastStoneInInEmptyCounter() throws Exception {
+	public void testMoveWhenLastStoneInInEmptyCounter() throws Exception {
 		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 2);
 
 		GameDto gameDto = new GameDto();
@@ -146,7 +146,7 @@ public class MancalaServiceTest {
 	}
 
 	@Test
-	public void whenMove_LastStoneInEmptyounterPit() throws ResourceNotFoundException {
+	public void testMoveWhenLastStoneInEmptyounterPit() throws ResourceNotFoundException {
 		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 0);
 
 		GameDto gameDto = new GameDto();
@@ -175,7 +175,7 @@ public class MancalaServiceTest {
 	}
 	
 	@Test
-	public void whenMove_whenThePlayersAreEqual() throws ResourceNotFoundException {
+	public void testMoveWhenThePlayersAreEqual() throws ResourceNotFoundException {
 		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 5);
 
 		GameDto gameDto = new GameDto();
@@ -200,7 +200,7 @@ public class MancalaServiceTest {
 	}
 	
 	@Test
-	public void whenMove_whenThereIsAWinner() throws ResourceNotFoundException {
+	public void TestMoveWhenThereIsAWinner() throws ResourceNotFoundException {
 		Movement movement = new Movement("random", Constants.PLAYER1_KEY, 5);
 
 		GameDto gameDto = new GameDto();
